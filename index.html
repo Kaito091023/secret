@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-        <title>💌 Confession Letter</title>
+        <title>💌 Digital Confession</title>
         <style>
             * {
                 margin: 0;
@@ -40,7 +40,6 @@
                 display: none !important;
             }
 
-            /* ========= PASSCODE SCREEN ========= */
             .passcode-wrapper {
                 padding: 32px 24px 40px;
                 text-align: center;
@@ -182,7 +181,6 @@
                 .keypad-row { gap: 15px; }
             }
 
-            /* ========= MAIN DASHBOARD - VERTICAL LAYOUT ========= */
             .dashboard {
                 background: #fffaf5;
                 min-height: 80vh;
@@ -211,7 +209,6 @@
                 font-style: italic;
             }
 
-            /* VERTICAL BUTTONS STACK */
             .vertical-nav {
                 display: flex;
                 flex-direction: column;
@@ -269,7 +266,6 @@
                 color: #ffb7c5;
             }
 
-            /* ========= PAGE CONTAINER (SEPARATE PAGES) ========= */
             .page-container {
                 background: #fffaf5;
                 min-height: 70vh;
@@ -322,7 +318,6 @@
                 flex-direction: column;
             }
 
-            /* ========= DIRECT LOVE LETTER STYLES (NO ENVELOPE) ========= */
             .direct-letter {
                 background: linear-gradient(145deg, #fffef7 0%, #fff9f0 100%);
                 border-radius: 48px;
@@ -484,7 +479,6 @@
                 background: #ffccd5;
             }
 
-            /* Gallery Page */
             .gallery-section h3 {
                 color: #c44569;
                 text-align: center;
@@ -549,13 +543,12 @@
     </head>
     <body>
     <div class="app-container">
-        <!-- PASSCODE SCREEN -->
         <div id="passcodeScreen" class="screen">
             <div class="passcode-wrapper">
                 <div class="passcode-header">
                     <div class="emoji-icon">💌🔐</div>
                     <h2>Enter 4-Digit Code to Unlock</h2>
-                    <p style="font-size:0.75rem; margin-top:4px;">"Will be dropping hints later :>"</p>
+                    <p style="font-size:0.75rem; margin-top:4px;">"Hint: check the url"</p>
                 </div>
                 <div class="code-display">
                     <input type="text" id="codeInput" class="code-digits" readonly placeholder="____" maxlength="4" value="">
@@ -591,12 +584,11 @@
             </div>
         </div>
 
-        <!-- MAIN DASHBOARD (Vertical navigation) -->
         <div id="mainDashboard" class="screen hidden">
             <div class="dashboard">
                 <div class="simple-header">
                     <h1>Congratulations!</h1>
-                    <p class="sub-message">I hope you enjoy!</p>
+                    <p class="sub-message">I hope you enjoy!💖</p>
                 </div>
                 <div class="vertical-nav">
                     <button class="nav-btn-vertical" data-section="message">
@@ -622,7 +614,6 @@
             </div>
         </div>
 
-        <!-- MESSAGE PAGE - ENVELOPE REMOVED, DIRECT LOVE LETTER -->
         <div id="messagePage" class="screen hidden">
             <div class="page-container">
                 <div class="page-header">
@@ -726,8 +717,7 @@
     </div>
 
     <script>
-        // PASSCODE LOGIC
-        const CORRECT_CODE = "1234"; // Change this to your desired 4-digit code
+        const CORRECT_CODE = "0910";
         let currentCode = "";
         const codeInputField = document.getElementById("codeInput");
         const errorContainer = document.getElementById("errorContainer");
@@ -803,7 +793,6 @@
             }
         }
 
-        // MUSIC DATA
         const playlist = [
             { title: "Captivated", artist: "IV OF SPADES", emoji: "🎤", src: "IV OF SPADES - Captivated.mp3" },
             { title: "Dear", artist: "Ben&Ben", emoji: "🎤", src: "Ben&Ben - Dear.mp3" },
@@ -856,7 +845,6 @@
             });
         }
 
-        // GALLERY
         const galleryImages = [
             { url: "https://picsum.photos/id/20/300/300", caption: "Romantic Sunset 💕" },
             { url: "https://picsum.photos/id/42/300/300", caption: "Love & Laughter 😊" },
@@ -935,7 +923,6 @@
             
             if (pageId === 'musicPage') renderMusicPageContent();
             else if (pageId === 'galleryPage') renderGalleryPageContent();
-            // messagePage no longer needs envelope listener - direct letter always visible
         }
 
         function goBackToDashboard() {
