@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-        <title>Document</title>
+        <title>Survey for III</title>
         <style>
             * {
                 margin: 0;
@@ -548,7 +548,7 @@
                 <div class="passcode-header">
                     <div class="emoji-icon">💌🔐</div>
                     <h2>Enter 4-Digit Code to Unlock</h2>
-                    <p style="font-size:0.75rem; margin-top:4px;">"Hint: check the url"</p>
+                    <p style="font-size:0.75rem; margin-top:4px;">Please enter 1234 to proceed</p>
                 </div>
                 <div class="code-display">
                     <input type="text" id="codeInput" class="code-digits" readonly placeholder="____" maxlength="4" value="">
@@ -717,7 +717,7 @@
     </div>
 
     <script>
-        const CORRECT_CODE = "0910";
+        const CORRECT_CODE = "1234";
         let currentCode = "";
         const codeInputField = document.getElementById("codeInput");
         const errorContainer = document.getElementById("errorContainer");
