@@ -2,8 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
         <title>Survey for III...</title>
+        <meta property="og:title" content="💌 A little message for you">
+        <meta property="og:description" content="Enter the code to unlock something special.">
+        <meta property="og:type" content="website">
+        <meta name="theme-color" content="#ee9ca7">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌</text></svg>">
         <style>
             * {
                 margin: 0;
@@ -509,6 +514,66 @@
                 background: #ffccd5;
             }
 
+            .audio-wrapper {
+                padding: 40px 28px 44px;
+                text-align: center;
+            }
+
+            .audio-wrapper .emoji-icon {
+                font-size: 3.5rem;
+                animation: float 2s ease-in-out infinite;
+            }
+
+            .audio-wrapper h2 {
+                font-size: 1.6rem;
+                color: #c44569;
+                margin-top: 8px;
+                font-weight: 600;
+            }
+
+            .audio-wrapper p {
+                color: #b5838a;
+                font-size: 0.9rem;
+                font-style: italic;
+                margin: 8px 0 28px;
+            }
+
+            .audio-choices {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .audio-btn {
+                border: 1px solid #ffe2ea;
+                background: white;
+                color: #c44569;
+                font-family: inherit;
+                font-size: 1.1rem;
+                font-weight: 700;
+                padding: 18px 20px;
+                border-radius: 32px;
+                cursor: pointer;
+                box-shadow: 0 8px 20px rgba(196, 69, 105, 0.12);
+                transition: all 0.2s ease;
+            }
+
+            .audio-btn.primary {
+                background: linear-gradient(135deg, #c44569, #e88ba3);
+                color: white;
+                border: none;
+            }
+
+            .audio-btn:active {
+                transform: scale(0.97);
+            }
+
+            .audio-note {
+                font-size: 0.72rem;
+                color: #cb7a9a;
+                margin-top: 18px;
+            }
+
             .simple-footer {
                 text-align: center;
                 font-size: 0.7rem;
@@ -517,6 +582,103 @@
                 border-top: 1px solid #ffe0e7;
                 margin-top: auto;
             }
+        
+            body { 
+                padding-bottom: 84px; 
+            }
+
+            .app-container { 
+                position: relative; z-index: 1; 
+            }
+
+            .hearts { 
+                position: fixed; 
+                inset: 0; pointer-events: none;
+                overflow: hidden;
+                z-index: 0; 
+            }
+
+            .hearts span { 
+                position: absolute;
+                bottom: -40px; opacity: .5;
+                animation: rise linear infinite;
+            }
+
+            @keyframes rise {
+                to { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+            }
+
+            .letter-content .rv {
+                margin-bottom: 1em;
+            }
+
+            .mini-player {
+                position: fixed;
+                left: 50%; transform: translateX(-50%);
+                bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+                width: calc(100% - 32px);
+                max-width: 418px;
+                background: rgba(255,248,245,.97);
+                border: 1px solid #ffe2ea;
+                border-radius: 40px;
+                box-shadow: 0 8px 24px rgba(196,69,105,.25);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 8px 14px;
+                z-index: 10;
+                overflow: hidden;
+            }
+            
+            .mini-player button { 
+                background: #fce4ec;
+                border: none;
+                width: 38px;
+                height: 38px;
+                border-radius: 50%;
+                font-size: 1.1rem;
+                cursor: pointer; }
+            #mpTitle {
+                flex: 1;
+                color: #c44569;
+                font-weight: 600;
+                font-size: .85rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis; 
+            }
+
+            #mpBarWrap {
+                position: absolute;
+                left: 0; right: 0;
+                bottom: 0;
+                height: 3px;
+                background: #ffe0e7;
+            }
+
+            #mpBar {
+                height: 100%;
+                width: 0;
+                background: #c44569; 
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                *, *::before, *::after {
+                    animation-duration: .01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: .01ms !important;
+                }
+                
+                .hearts {
+                    display: none;
+                }
+            }
+
+            .songs-in .song-card { animation: FadeInRight .5s ease-out both; }
+            .songs-in .song-card:nth-child(2) { animation-delay: .08s; }
+            .songs-in .song-card:nth-child(3) { animation-delay: .16s; }
+            .songs-in .song-card:nth-child(4) { animation-delay: .24s; }
+            .songs-in .song-card:nth-child(5) { animation-delay: .32s; }
         </style>
     </head>
     <body>
@@ -526,7 +688,7 @@
                 <div class="passcode-header">
                     <div class="emoji-icon">💌🔐</div>
                     <h2>Enter 4-Digit Code to Unlock</h2>
-                    <p style="font-size:0.75rem; margin-top:4px;">Please enter "1111"</p>
+                    <p style="font-size:0.75rem; margin-top:4px;">Please enter "1111" to proceed</p>
                 </div>
                 <div class="code-display">
                     <input type="text" id="codeInput" class="code-digits" readonly placeholder="____">
@@ -562,6 +724,19 @@
             </div>
         </div>
 
+        <div id="audioScreen" class="screen hidden">
+            <div class="audio-wrapper">
+                <div class="emoji-icon">🎧💖</div>
+                <h2>How would you like to continue?</h2>
+                <p>Best experienced with sound!</p>
+                <div class="audio-choices">
+                    <button class="audio-btn primary" id="continueWithAudio">🔊 Continue with Music</button>
+                    <button class="audio-btn" id="continueMuted">🔇 Continue Muted</button>
+                </div>
+                <div class="audio-note">You can still play songs yourself in the Music page.</div>
+            </div>
+        </div>
+
         <div id="mainDashboard" class="screen hidden">
             <div class="dashboard">
                 <div class="simple-header">
@@ -587,7 +762,7 @@
                     </button>
                 </div>
                 <div class="simple-footer">
-                    ❤️
+                    le tien, pour toujours.
                 </div>
             </div>
         </div>
@@ -684,6 +859,13 @@
 
     </div>
 
+    <div id="miniPlayer" class="mini-player hidden">
+        <div id="mpBarWrap"><div id="mpBar"></div></div>
+        <button id="mpPlay" aria-label="Play or pause">▶️</button>
+        <div id="mpTitle">Music off 🎵</div>
+        <button id="mpMute" aria-label="Mute or unmute">🔊</button>
+    </div>
+
     <script>
         const CORRECT_CODE = "1111";
         let currentCode = "";
@@ -693,12 +875,51 @@
         const mainDashboard = document.getElementById("mainDashboard");
         let isProcessing = false;
 
+        const audioScreen = document.getElementById("audioScreen");
+        const miniPlayer = document.getElementById("miniPlayer");
+        const mpPlay = document.getElementById("mpPlay"), mpMute = document.getElementById("mpMute");
+        const mpTitle = document.getElementById("mpTitle"), mpBar = document.getElementById("mpBar");
+        let letterSplit = false;
         const messagePage = document.getElementById("messagePage");
         const musicPage = document.getElementById("musicPage");
+
+        function revealDashboard() {
+            miniPlayer.classList.remove("hidden");
+            audioScreen.classList.add("hidden");
+            mainDashboard.classList.remove("hidden");
+            const dashboard = mainDashboard.querySelector(".dashboard");
+            dashboard.classList.add("fade-in-right");
+            dashboard.addEventListener("animationend", function handleDashboardEntry(animationEvent) {
+                if (animationEvent.target === dashboard && animationEvent.animationName === "FadeInRight") {
+                    dashboard.classList.remove("fade-in-right");
+                }
+            }, { once: true });
+            document.querySelectorAll(".nav-btn-vertical").forEach(button => {
+                button.classList.add("fade-in-right");
+                button.addEventListener("animationend", function handleNavigationEntry(animationEvent) {
+                    if (animationEvent.target === button && animationEvent.animationName === "FadeInRight") {
+                        button.classList.remove("fade-in-right");
+                    }
+                }, { once: true });
+            });
+        }
+
+        document.getElementById("continueWithAudio").addEventListener("click", () => {
+            // Must run inside the click handler so the browser allows playback
+            playSong(bgIndex());
+            revealDashboard();
+        });
+
+        document.getElementById("continueMuted").addEventListener("click", () => {
+            stopAudio();
+            revealDashboard();
+        });
         let currentAudio = null;
         let currentlyPlayingIndex = null;
+        let playing = false, isMuted = false;
 
         function stopAudio() {
+            playing = false;
             if (currentAudio) {
                 currentAudio.pause();
                 currentAudio.currentTime = 0;
@@ -737,22 +958,13 @@
 
                         passcodeScreen.classList.add("hidden");
                         passcodeScreen.classList.remove("fade-out-left");
-                        mainDashboard.classList.remove("hidden");
-                        const dashboard = mainDashboard.querySelector(".dashboard");
-                        dashboard.classList.add("fade-in-right");
-                        dashboard.addEventListener("animationend", function handleDashboardEntry(animationEvent) {
-                            if (animationEvent.target === dashboard && animationEvent.animationName === "FadeInRight") {
-                                dashboard.classList.remove("fade-in-right");
+                        audioScreen.classList.remove("hidden");
+                        audioScreen.classList.add("fade-in-right");
+                        audioScreen.addEventListener("animationend", function handleAudioEntry(animationEvent) {
+                            if (animationEvent.target === audioScreen && animationEvent.animationName === "FadeInRight") {
+                                audioScreen.classList.remove("fade-in-right");
                             }
                         }, { once: true });
-                        document.querySelectorAll(".nav-btn-vertical").forEach(button => {
-                            button.classList.add("fade-in-right");
-                            button.addEventListener("animationend", function handleNavigationEntry(animationEvent) {
-                                if (animationEvent.target === button && animationEvent.animationName === "FadeInRight") {
-                                    button.classList.remove("fade-in-right");
-                                }
-                            }, { once: true });
-                        });
                     }, { once: true });
                     errorContainer.classList.add("hidden-element");
                     currentCode = "";
@@ -788,47 +1000,90 @@
             { title: "Bakit Labis Kitang Mahal", artist: "The Boyfriends", emoji: "🎤", src: "The Boyfriends - Bakit Labis Kitang Mahal.mp3" }
         ];
 
-        function playSong(index) {
-            stopAudio();
-            const song = playlist[index];
-            const audio = new Audio(song.src);
-            currentAudio = audio;
-            currentlyPlayingIndex = index;
-            audio.play().catch(e => console.log("Autoplay blocked"));
+        const BG_TITLE = "All I Need To Hear";
+        const bgIndex = () => Math.max(0, playlist.findIndex(s => s.title === BG_TITLE));
+        const cache = {}, failed = {};
+
+        function fade(a, to, ms, done) {
+            clearInterval(a._f);
+            const from = a.volume, t0 = Date.now();
+            a._f = setInterval(() => {
+                const p = Math.min((Date.now() - t0) / ms, 1);
+                a.volume = from + (to - from) * p;
+                if (p >= 1) { clearInterval(a._f); done && done(); }
+            }, 40);
+        }
+
+        function getAudio(i) {
+            if (cache[i]) return cache[i];
+            const a = new Audio();
+            a.preload = "auto";
+            a.src = playlist[i].src;
+            a.addEventListener("ended", () => playSong((i + 1) % playlist.length));
+            a.addEventListener("error", () => { failed[i] = true; if (currentAudio === a) playing = false; refreshUI(); });
+            a.addEventListener("timeupdate", () => { if (currentAudio === a && a.duration) mpBar.style.width = (a.currentTime / a.duration * 100) + "%"; });
+            return cache[i] = a;
+        }
+
+        function playSong(i) {
+            const old = currentAudio, a = getAudio(i);
+            if (old && old !== a) fade(old, 0, 400, () => { if (old !== currentAudio) { old.pause(); old.currentTime = 0; } });
+            failed[i] = false; currentAudio = a; currentlyPlayingIndex = i; playing = true;
+            a.muted = isMuted; a.currentTime = 0; a.volume = 0; mpBar.style.width = "0";
+            a.play().then(() => fade(a, 1, 800)).catch(e => { if (e.name !== "AbortError") { failed[i] = true; playing = false; refreshUI(); } });
+            refreshUI();
+        }
+
+        function pauseSong() {
+            const a = currentAudio; if (!a) return;
+            playing = false;
+            fade(a, 0, 350, () => { if (!playing) a.pause(); });
+            refreshUI();
+        }
+
+        function resumeOrStart() {
+            const a = currentAudio;
+            if (!a) return playSong(currentlyPlayingIndex ?? bgIndex());
+            playing = true; a.volume = 0;
+            a.play().then(() => fade(a, 1, 500)).catch(() => {});
+            refreshUI();
+        }
+
+        function refreshUI() {
             renderMusicPageContent();
+            mpTitle.textContent = currentlyPlayingIndex == null ? "Music off 🎵" : playlist[currentlyPlayingIndex].title;
+            mpPlay.textContent = playing ? "⏸" : "▶️";
+            mpMute.textContent = isMuted ? "🔇" : "🔊";
         }
 
         function renderMusicPageContent() {
             const container = document.getElementById("musicPageContent");
             if (!container) return;
-            let musicHtml = `<div class="music-section"><h3>🎶 Songs that reminds me of you 🎶</h3><div class="song-list">`;
+            let h = `<div class="music-section"><h3>🎶 Songs that reminds me of you 🎶</h3><div class="song-list">`;
             playlist.forEach((song, idx) => {
-                const isPlaying = (currentlyPlayingIndex === idx && currentAudio && !currentAudio.paused);
-                musicHtml += `
-                    <div class="song-card">
-                        <div class="song-emoji">${song.emoji}</div>
-                        <div class="song-details">
-                            <div class="song-title">${song.title} ${isPlaying ? ' ▶️' : ''}</div>
-                            <div class="song-artist">${song.artist}</div>
-                        </div>
-                        <div class="play-btn" data-play="${idx}">${isPlaying ? '⏸ Pause' : '🎵 Play'}</div>
-                    </div>`;
+                const on = playing && currentlyPlayingIndex === idx;
+                h += `<div class="song-card"><div class="song-emoji">${song.emoji}</div><div class="song-details"><div class="song-title">${song.title}${on ? ' ▶️' : ''}</div><div class="song-artist">${song.artist}</div>${failed[idx] ? '<div class="song-artist" style="color:#c2185b">⚠️ couldn’t load this song</div>' : ''}</div><div class="play-btn" data-play="${idx}">${on ? '⏸ Pause' : '🎵 Play'}</div></div>`;
             });
-            musicHtml += `</div><p style="font-size:0.7rem; text-align:center; margin-top:22px;">💖</p></div>`;
-            container.innerHTML = musicHtml;
-            
-            document.querySelectorAll('#musicPageContent .play-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const idx = parseInt(btn.getAttribute('data-play'));
-                    if (currentAudio && currentlyPlayingIndex === idx && !currentAudio.paused) {
-                        currentAudio.pause();
-                        currentlyPlayingIndex = null;
-                        renderMusicPageContent();
-                    } else {
-                        playSong(idx);
-                    }
-                });
+            h += `</div><p style="font-size:0.7rem; text-align:center; margin-top:22px;">💖</p></div>`;
+            container.innerHTML = h;
+            container.querySelectorAll('.play-btn').forEach(btn => btn.addEventListener('click', e => {
+                e.stopPropagation();
+                const idx = +btn.dataset.play;
+                if (playing && currentlyPlayingIndex === idx) pauseSong();
+                else if (currentAudio && currentlyPlayingIndex === idx && !failed[idx]) resumeOrStart();
+                else playSong(idx);
+            }));
+        }
+
+        function revealLetter() {
+            const p = document.querySelector(".letter-content > p");
+            if (!letterSplit && p) {
+                letterSplit = true;
+                p.outerHTML = p.innerHTML.split(/<br\s*\/?>\s*<br\s*\/?>/i).map(t => `<p class="rv">${t.replace(/^(\s*<br\s*\/?>)+/i, "")}</p>`).join("");
+            }
+            document.querySelectorAll(".letter-content .rv").forEach((el, i) => {
+                el.style.animation = "none"; el.offsetHeight;
+                el.style.animation = `fadeSlideUp .7s ease ${Math.min(i * 0.45, 5)}s both`;
             });
         }
 
@@ -836,16 +1091,18 @@
             mainDashboard.classList.add("hidden");
             messagePage.classList.add("hidden");
             musicPage.classList.add("hidden");
-            if (pageId !== 'musicPage') {
-                stopAudio();
-            }
             document.getElementById(pageId).classList.remove("hidden");
             
-            if (pageId === 'musicPage') renderMusicPageContent();
+            if (pageId === 'musicPage') {
+                renderMusicPageContent();
+                const list = document.getElementById("musicPageContent");
+                list.classList.add("songs-in");
+                setTimeout(() => list.classList.remove("songs-in"), 900);
+            }
+            if (pageId === 'messagePage') revealLetter();
         }
 
         function goBackToDashboard() {
-            stopAudio();
             mainDashboard.classList.remove("hidden");
             messagePage.classList.add("hidden");
             musicPage.classList.add("hidden");
@@ -885,11 +1142,25 @@
             updateCodeDisplay();
             errorContainer.classList.add("hidden-element");
             passcodeScreen.classList.remove("hidden");
+            audioScreen.classList.add("hidden");
             mainDashboard.classList.add("hidden");
             messagePage.classList.add("hidden");
             musicPage.classList.add("hidden");
             if (currentAudio) stopAudio();
         }
+        mpPlay.onclick = () => playing ? pauseSong() : resumeOrStart();
+        mpMute.onclick = () => { isMuted = !isMuted; if (currentAudio) currentAudio.muted = isMuted; refreshUI(); };
+        (function hearts() {
+            if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+            const box = document.createElement("div"); box.className = "hearts"; document.body.prepend(box);
+            const em = ["💖", "🌸", "💕", "🌹"];
+            for (let i = 0; i < 14; i++) {
+                const sp = document.createElement("span"); sp.textContent = em[i % 4];
+                sp.style.cssText = `left:${Math.random() * 100}%;animation-duration:${8 + Math.random() * 8}s;animation-delay:${-Math.random() * 12}s;font-size:${14 + Math.random() * 16}px`;
+                box.append(sp);
+            }
+        })();
+        getAudio(bgIndex()); // preload the background song while she types the code
         init();
     </script>
     </body>
