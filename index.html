@@ -3,12 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        <title>Survey for III...</title>
-        <meta property="og:title" content="💌 A little message for you">
-        <meta property="og:description" content="Enter the code to unlock something special.">
+        <title>Research Participation Survey</title>
+        <meta property="og:title" content="Research Participation Survey">
+        <meta property="og:description" content="You have been invited to take part in a short survey. Please enter your access code to begin.">
         <meta property="og:type" content="website">
-        <meta name="theme-color" content="#ee9ca7">
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌</text></svg>">
+        <!-- For a preview image, host a picture and add: <meta property="og:image" content="https://your-site/preview.jpg"> -->
+        <meta name="theme-color" id="themeColor" content="#4a7bd0">
+        <link rel="icon" id="favicon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
         <style>
             * {
                 margin: 0;
@@ -583,120 +584,55 @@
                 margin-top: auto;
             }
         
-            body { 
-                padding-bottom: 84px; 
-            }
-
-            .app-container { 
-                position: relative; z-index: 1; 
-            }
-
-            .hearts { 
-                position: fixed; 
-                inset: 0; pointer-events: none;
-                overflow: hidden;
-                z-index: 0; 
-            }
-
-            .hearts span { 
-                position: absolute;
-                bottom: -40px; opacity: .5;
-                animation: rise linear infinite;
-            }
-
-            @keyframes rise {
-                to { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
-            }
-
-            .letter-content .rv {
-                margin-bottom: 1em;
-            }
-
-            .mini-player {
-                position: fixed;
-                left: 50%; transform: translateX(-50%);
-                bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-                width: calc(100% - 32px);
-                max-width: 418px;
-                background: rgba(255,248,245,.97);
-                border: 1px solid #ffe2ea;
-                border-radius: 40px;
-                box-shadow: 0 8px 24px rgba(196,69,105,.25);
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                padding: 8px 14px;
-                z-index: 10;
-                overflow: hidden;
-            }
-            
-            .mini-player button { 
-                background: #fce4ec;
-                border: none;
-                width: 38px;
-                height: 38px;
-                border-radius: 50%;
-                font-size: 1.1rem;
-                cursor: pointer; }
-            #mpTitle {
-                flex: 1;
-                color: #c44569;
-                font-weight: 600;
-                font-size: .85rem;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis; 
-            }
-
-            #mpBarWrap {
-                position: absolute;
-                left: 0; right: 0;
-                bottom: 0;
-                height: 3px;
-                background: #ffe0e7;
-            }
-
-            #mpBar {
-                height: 100%;
-                width: 0;
-                background: #c44569; 
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-                *, *::before, *::after {
-                    animation-duration: .01ms !important;
-                    animation-iteration-count: 1 !important;
-                    transition-duration: .01ms !important;
-                }
-                
-                .hearts {
-                    display: none;
-                }
-            }
-
+            body { padding-bottom: 84px; }
+            .app-container { position: relative; z-index: 1; }
+            .hearts { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+            .hearts span { position: absolute; bottom: -40px; opacity: .5; animation: rise linear infinite; }
+            @keyframes rise { to { transform: translateY(-110vh) rotate(20deg); opacity: 0; } }
+            .letter-content .rv { margin-bottom: 1em; }
+            .mini-player { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); width: calc(100% - 32px); max-width: 418px; background: rgba(255,248,245,.97); border: 1px solid #ffe2ea; border-radius: 40px; box-shadow: 0 8px 24px rgba(196,69,105,.25); display: flex; align-items: center; gap: 10px; padding: 8px 14px; z-index: 10; overflow: hidden; }
+            .mini-player button { background: #fce4ec; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; }
+            #mpTitle { flex: 1; color: #c44569; font-weight: 600; font-size: .85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            #mpBarWrap { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #ffe0e7; }
+            #mpBar { height: 100%; width: 0; background: #c44569; }
+            @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .hearts { display: none; } }
             .songs-in .song-card { animation: FadeInRight .5s ease-out both; }
             .songs-in .song-card:nth-child(2) { animation-delay: .08s; }
             .songs-in .song-card:nth-child(3) { animation-delay: .16s; }
             .songs-in .song-card:nth-child(4) { animation-delay: .24s; }
             .songs-in .song-card:nth-child(5) { animation-delay: .32s; }
+        
+            body::before { content: ""; position: fixed; inset: 0; background: linear-gradient(145deg, #eaf1fc 0%, #c9d8f0 100%); opacity: 0; transition: opacity 1.2s ease; z-index: 0; pointer-events: none; }
+            body.survey-mode::before { opacity: 1; }
+            body.survey-mode #passcodeScreen { background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(30,60,120,.18), 0 0 0 1px #d6e0f0; font-family: Arial, Helvetica, sans-serif; }
+            body.survey-mode .passcode-header .emoji-icon { animation: none; font-size: 2.4rem; }
+            body.survey-mode .passcode-header h2 { color: #1f3a68; font-size: 1.25rem; }
+            body.survey-mode .passcode-header p { color: #5c6b85; font-size: .8rem; line-height: 1.5; margin-top: 8px; }
+            body.survey-mode .code-display { background: #f4f7fc; border: 1px solid #b7c6e0; border-radius: 8px; }
+            body.survey-mode .code-digits { color: #1f3a68; }
+            body.survey-mode .key { border-radius: 12px; color: #1f3a68; border: 1px solid #d6e0f0; box-shadow: 0 2px 6px rgba(30,60,120,.1); }
+            body.survey-mode .key:active { background: #e8eefb; }
+            body.survey-mode .key.del { background: #eef2f9; color: #1f3a68; }
+            body.survey-mode .error-box { background: #fdecea; border-radius: 8px; }
+            body.survey-mode .error-box span { color: #b3261e; }
         </style>
     </head>
-    <body>
+    <body class="survey-mode">
     <div class="app-container">
         <div id="passcodeScreen" class="screen">
             <div class="passcode-wrapper">
                 <div class="passcode-header">
-                    <div class="emoji-icon">💌🔐</div>
-                    <h2>Enter 4-Digit Code to Unlock</h2>
-                    <p style="font-size:0.75rem; margin-top:4px;">Please enter "1111" to proceed</p>
+                    <div class="emoji-icon">📋</div>
+                    <h2>Research Participation Survey</h2>
+                    <p style="font-size:0.75rem; margin-top:4px;">Thank you for agreeing to take part! Please enter your section to begin.</p>
                 </div>
                 <div class="code-display">
                     <input type="text" id="codeInput" class="code-digits" readonly placeholder="____">
                 </div>
                 <div id="errorContainer" class="hidden-element">
                     <div class="error-box">
-                        <span>❌ Wrong passcode! Try again.</span>
-                        <div class="gif-emote">😭💔😫</div>
+                        <span>Invalid access code. Please try again.</span>
+                        
                     </div>
                 </div>
                 <div class="keypad">
@@ -727,8 +663,8 @@
         <div id="audioScreen" class="screen hidden">
             <div class="audio-wrapper">
                 <div class="emoji-icon">🎧💖</div>
-                <h2>How would you like to continue?</h2>
-                <p>Best experienced with sound!</p>
+                <h2>Surprise! 💌</h2>
+                <p>This was never a survey, I made it just for you :>><br>How would you like to continue?</p>
                 <div class="audio-choices">
                     <button class="audio-btn primary" id="continueWithAudio">🔊 Continue with Music</button>
                     <button class="audio-btn" id="continueMuted">🔇 Continue Muted</button>
@@ -762,7 +698,7 @@
                     </button>
                 </div>
                 <div class="simple-footer">
-                    le tien, pour toujours.
+                    ❤️
                 </div>
             </div>
         </div>
@@ -867,7 +803,7 @@
     </div>
 
     <script>
-        const CORRECT_CODE = "1111";
+        const CORRECT_CODE = "1201";
         let currentCode = "";
         const codeInputField = document.getElementById("codeInput");
         const errorContainer = document.getElementById("errorContainer");
@@ -959,6 +895,7 @@
                         passcodeScreen.classList.add("hidden");
                         passcodeScreen.classList.remove("fade-out-left");
                         audioScreen.classList.remove("hidden");
+                        revealSurprise();
                         audioScreen.classList.add("fade-in-right");
                         audioScreen.addEventListener("animationend", function handleAudioEntry(animationEvent) {
                             if (animationEvent.target === audioScreen && animationEvent.animationName === "FadeInRight") {
@@ -1148,9 +1085,16 @@
             musicPage.classList.add("hidden");
             if (currentAudio) stopAudio();
         }
+        function revealSurprise() {
+            document.body.classList.remove("survey-mode");
+            document.title = "💌 Digital Confession";
+            document.getElementById("favicon").href = "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌</text></svg>";
+            document.getElementById("themeColor").content = "#ee9ca7";
+            startHearts();
+        }
         mpPlay.onclick = () => playing ? pauseSong() : resumeOrStart();
         mpMute.onclick = () => { isMuted = !isMuted; if (currentAudio) currentAudio.muted = isMuted; refreshUI(); };
-        (function hearts() {
+        function startHearts() {
             if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
             const box = document.createElement("div"); box.className = "hearts"; document.body.prepend(box);
             const em = ["💖", "🌸", "💕", "🌹"];
@@ -1159,7 +1103,7 @@
                 sp.style.cssText = `left:${Math.random() * 100}%;animation-duration:${8 + Math.random() * 8}s;animation-delay:${-Math.random() * 12}s;font-size:${14 + Math.random() * 16}px`;
                 box.append(sp);
             }
-        })();
+        }
         getAudio(bgIndex()); // preload the background song while she types the code
         init();
     </script>
